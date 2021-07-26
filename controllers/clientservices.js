@@ -2,12 +2,18 @@ const ClientService = require('../models/clientservices')
 
 module.exports = (app) => {
   app.get('/clientservices', (req, res) => {
-    res.send('Rota de atendimentos!')
+    ClientService.list(res)
+  })
 
-    app.post('/clientservices', (req, res) => {
-      const clientservice = req.body
+  app.get('/clientservices/:id', (req, res) => {
+    const id = parseInt(req.params.id)
 
-      ClientService.add(clientservice, res)
-    })
+    ClientService.searchforId(id, res)
+  })
+
+  app.post('/clientservices', (req, res) => {
+    const clientservice = req.body
+
+    ClientService.add(clientservice, res)
   })
 }
