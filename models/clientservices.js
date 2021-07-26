@@ -1,10 +1,14 @@
+const moment = require('moment')
 const connection = require('../database/connection')
 
 class ClientService {
   add(clientservice) {
-    const sql = 'INSERT INTO ClientServices SET?'
+    const creationDate = moment().format('YYYY-MM-DD HH:mm:ss')
+    const date = moment(clientservice.date, 'DD/MM/YYYY').format('YYYY-MM-DD HH:mm:ss')
+    const datedService = { ...clientservice, creationDate, date }
 
-    connection.query(sql, clientservice, (err, results) => {
+    const sql = 'INSERT INTO ClientServices SET?'
+    connection.query(sql, datedService, (err, results) => {
       if (err) {
         console.log(err)
       } else {

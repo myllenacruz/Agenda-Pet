@@ -6,7 +6,7 @@ module.exports = (app) => {
 
     app.post('/clientservices', (req, res) => {
       const clientservice = req.body
-      
+
       ClientService.add(clientservice)
       res.send('Rota de atendimentos (POST).')
     })
