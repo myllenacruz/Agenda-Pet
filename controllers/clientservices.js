@@ -16,4 +16,11 @@ module.exports = (app) => {
 
     ClientService.add(clientservice, res)
   })
+
+  app.patch('/clientservices/:id', (req, res) => {
+    const id = parseInt(req.params.id)
+    const values = req.body
+
+    ClientService.adjust(id, values, res)
+  })
 }
