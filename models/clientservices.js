@@ -12,7 +12,7 @@ class ClientService {
     const validations = [
       {
         name: 'date',
-        valide: validDate,
+        valid: validDate,
         message: 'Date must be bigger or equal to current date',
       },
       {
