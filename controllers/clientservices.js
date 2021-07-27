@@ -23,4 +23,10 @@ module.exports = (app) => {
 
     ClientService.adjust(id, values, res)
   })
+
+  app.delete('/clientservices/:id', (req, res) => {
+    const id = parseInt(req.params.id)
+
+    ClientService.delete(id, res)
+  })
 }

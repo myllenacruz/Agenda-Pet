@@ -34,7 +34,7 @@ class ClientService {
         if (err) {
           res.status(400).json(err)
         } else {
-          res.status(201).json(results)
+          res.status(201).json(clientservice)
         }
       })
     }
@@ -64,16 +64,29 @@ class ClientService {
   }
 
   adjust(id, values, res) {
-    if(values.date){
-      values.date = moment(values.date, 'DD/MM/YYYY').format('YYYY-MM-DD HH:mm:ss')
+    if (values.date) {
+      values.date = moment(values.date, 'DD/MM/YYYY').format(
+        'YYYY-MM-DD HH:mm:ss'
+      )
     }
-    
-    const sql = 'UPDATE ClientServices SET ? WHERE id=?'   
+
+    const sql = 'UPDATE ClientServices SET ? WHERE id=?'
     connection.query(sql, [values, id], (err, results) => {
-      if(err) {
+      if (err) {
         res.status(400).json(err)
       } else {
-        res.status(200).json(results)
+        res.status(200).json({ ...values, id })
+      }
+    })
+  }
+
+  delete(id, res) {
+    const sql = 'DELETE FROM ClientServices WHERE id=?'
+    connection.query(sql, id, (err, results) => {
+      if (err) {
+        res.status(400).json(err)
+      } else {
+        res.status(200).json({ id })
       }
     })
   }
